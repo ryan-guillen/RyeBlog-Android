@@ -13,7 +13,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -104,8 +108,15 @@ public class MainActivity extends AppCompatActivity  {
             if (posts != null) {
                 Post current = posts.get(position);
                 holder.post = current;
-                holder.titleView.setText(current.title);
-                holder.userView.setText(current.username);
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                if (!sharedPref.getBoolean("switch", true)) {
+                    holder.titleView.setText(current.title);
+                    holder.userView.setText(current.username);
+                }
+                else {
+                    holder.titleView.setText(current.username);
+                    holder.userView.setText(current.title);
+                } // TODO: fix, currently you have to refresh app to see change
                 holder.textView.setText(current.text);
             } else {
                 holder.titleView.setText("...intializing...");
