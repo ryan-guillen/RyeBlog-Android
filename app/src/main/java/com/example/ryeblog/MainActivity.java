@@ -30,7 +30,7 @@ import com.example.ryeblog.DB.PostViewModel;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
     private PostViewModel postViewModel;
 
     @Override
@@ -50,9 +50,8 @@ public class MainActivity extends AppCompatActivity  {
 
         postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
         postViewModel.getAllPosts().observe(this, adapter::setPosts);
-
-        System.out.println("item count: " + adapter.getItemCount());
     }
+    AddPostActivity addPostActivity = new AddPostActivity();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,14 +61,18 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent i;
         switch (item.getItemId()) {
             case R.id.action_settings:
-                Intent i = new Intent(this, SettingsActivity.class);
+                i = new Intent(this, SettingsActivity.class);
+                startActivity(i);
+                return true;
+            case R.id.add:
+                i = new Intent(this, AddPostActivity.class);
                 startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
     }
 
