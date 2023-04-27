@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
         Intent i;
         switch (item.getItemId()) {
             case R.id.action_settings:
-                i = new Intent(this, AddPostActivity.class);
+                i = new Intent(this, SettingsActivity.class);
                 startActivity(i);
                 return true;
             case R.id.add:
-                i = new Intent(this, LoginActivity.class);
+                i = new Intent(this, AddPostActivity.class);
                 startActivity(i);
                 return true;
             case R.id.search:
