@@ -12,4 +12,5 @@
     <string name="writePost">Write a Post</string>
     <string name="search">Search</string>
     <string name="cancel">Cancel</string>
+    <string name="logout">Logout</string>
 </resources>

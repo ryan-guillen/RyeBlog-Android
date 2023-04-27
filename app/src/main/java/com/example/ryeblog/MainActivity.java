@@ -73,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.search:
                 searchDialog();
                 return true;
+            case R.id.logout:
+                i = new Intent(this, LoginActivity.class);
+                i.putExtra("LOGOUT", true);
+                startActivity(i);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

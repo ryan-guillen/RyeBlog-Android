@@ -22,14 +22,18 @@ public class LoginActivity extends AppCompatActivity {
         TextView login = findViewById(R.id.login);
         login.setText(sharedPref.getString("USERNAME", "no val"));
 
+        Bundle extras = getIntent().getExtras();
+        boolean loggedOut = false;
+        if (extras != null) {
+            loggedOut = extras.getBoolean("LOGOUT");
+        }
 
-        /*
-        //if already logged in, go to MainActivity instead
-        if (!sharedPref.getString("USERNAME", "-1").equals("-1")) {
+        //if already logged in, go to MainActivity instead, unless you for here from logout
+        if (!sharedPref.getString("USERNAME", "-1").equals("-1") && !loggedOut) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
-         */
+
     }
 
 
