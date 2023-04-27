@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -139,7 +140,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = layoutInflater.inflate(R.layout.post_item, parent, false);
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+            View itemView;
+            if (sharedPref.getBoolean("switch", false))
+                itemView = layoutInflater.inflate(R.layout.post_item, parent, false);
+            else
+                itemView = layoutInflater.inflate(R.layout.post_item2, parent, false);
             return new PostViewHolder(itemView);
         }
 
@@ -148,15 +154,9 @@ public class MainActivity extends AppCompatActivity {
             if (posts != null) {
                 Post current = posts.get(position);
                 holder.post = current;
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                if (!sharedPref.getBoolean("switch", true)) {
-                    holder.titleView.setText(current.title);
-                    holder.userView.setText(current.username);
-                }
-                else {
-                    holder.titleView.setText(current.username);
-                    holder.userView.setText(current.title);
-                } // TODO: fix, currently you have to refresh app to see change
+                holder.titleView.setText(current.title);
+                holder.userView.setText(current.username);
+                //holder.userView.setPaintFlags(holder.userView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 holder.textView.setText(current.text);
             } else {
                 holder.titleView.setText("...intializing...");
