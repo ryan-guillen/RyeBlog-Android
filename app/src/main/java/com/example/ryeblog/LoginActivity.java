@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -20,6 +21,15 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPref = this.getSharedPreferences("application", Context.MODE_PRIVATE);
         TextView login = findViewById(R.id.login);
         login.setText(sharedPref.getString("USERNAME", "no val"));
+
+
+        /*
+        //if already logged in, go to MainActivity instead
+        if (!sharedPref.getString("USERNAME", "-1").equals("-1")) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
+         */
     }
 
 
@@ -35,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
 
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
+        }
+        else {
+            Toast.makeText(this, "Please enter in a username", Toast.LENGTH_SHORT).show();
         }
 
     }

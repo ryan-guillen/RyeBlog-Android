@@ -44,9 +44,24 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10sp"
         android:hint="@string/text"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:lines="4"
+        app:layout_constraintBottom_toTopOf="@id/createPostButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <Button
+        android:id="@+id/createPostButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loginButton"
+        android:onClick="onLogin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
