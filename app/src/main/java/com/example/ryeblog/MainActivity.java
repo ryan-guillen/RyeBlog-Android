@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 return true;
             case R.id.add:
-                i = new Intent(this, AddPostActivity.class);
+                i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 return true;
             default:

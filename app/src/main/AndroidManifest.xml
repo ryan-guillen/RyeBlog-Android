@@ -12,6 +12,9 @@
         android:theme="@style/Theme.RyeBlog"
         tools:targetApi="31">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -26,6 +29,7 @@
             android:label="settings">
             <intent-filter>
                 <action android:name="android.intent.action.SettingsActivity" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -35,6 +39,7 @@
             android:label="addpost">
             <intent-filter>
                 <action android:name="android.intent.action.AddPostActivity" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
