@@ -7,8 +7,13 @@
         android:icon="@drawable/baseline_add_24"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/search"
+        android:title="@string/action_settings"
+        android:icon="@drawable/baseline_search"
+        app:showAsAction="always"/>
+
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:icon="@drawable/baseline_settings_24"
-        app:showAsAction="always"/>
+        app:showAsAction="collapseActionView"/>
 </menu>

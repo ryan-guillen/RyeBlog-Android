@@ -9,4 +9,6 @@
     <string name="login">Enter username:</string>
     <string name="loginButton">LOGIN</string>
     <string name="writePost">Write a Post</string>
+    <string name="search">Search</string>
+    <string name="cancel">Cancel</string>
 </resources>
