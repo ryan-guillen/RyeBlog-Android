@@ -77,7 +77,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         @Override
         public PostListAdapter.PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = layoutInflater.inflate(R.layout.post_item, parent, false);
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ProfileActivity.this);
+            View itemView;
+            if (sharedPref.getBoolean("switch", false))
+                itemView = layoutInflater.inflate(R.layout.post_item, parent, false);
+            else
+                itemView = layoutInflater.inflate(R.layout.post_item2, parent, false);
             return new PostListAdapter.PostViewHolder(itemView);
         }
 
@@ -86,15 +91,8 @@ public class ProfileActivity extends AppCompatActivity {
             if (posts != null) {
                 Post current = posts.get(position);
                 holder.post = current;
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ProfileActivity.this);
-                if (!sharedPref.getBoolean("switch", true)) {
-                    holder.titleView.setText(current.title);
-                    holder.userView.setText(current.username);
-                }
-                else {
-                    holder.titleView.setText(current.username);
-                    holder.userView.setText(current.title);
-                } // TODO: fix, currently you have to refresh app to see change
+                holder.titleView.setText(current.title);
+                holder.userView.setText(current.username);
                 holder.textView.setText(current.text);
             } else {
                 holder.titleView.setText("...intializing...");

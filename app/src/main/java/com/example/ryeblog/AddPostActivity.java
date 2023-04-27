@@ -1,9 +1,13 @@
 package com.example.ryeblog;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,7 +33,24 @@ public class AddPostActivity extends AppCompatActivity {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
     }
 
-    public void onAddPost(View view) {
+    public void confirmDialog(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                addPost();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        builder.setTitle("Confirm").setMessage("Are you sure?");
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void addPost() {
         SharedPreferences sharedPref = this.getSharedPreferences("application", Context.MODE_PRIVATE);
         String user = sharedPref.getString("USERNAME", "-1");
 

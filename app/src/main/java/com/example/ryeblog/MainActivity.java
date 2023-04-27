@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, ProfileActivity.class);
                 i.putExtra("USERNAME", searchUsername);
                 MainActivity.this.startActivity(i);
-
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
