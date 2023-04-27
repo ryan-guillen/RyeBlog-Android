@@ -1,5 +1,6 @@
 package com.example.ryeblog;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ryeblog.DB.Post;
 import com.example.ryeblog.DB.PostViewModel;
@@ -76,14 +78,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public Dialog searchDialog() {
+    public void searchDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.dialog_search, null));
+        View dialogView = inflater.inflate(R.layout.dialog_search, null);
+        builder.setView(dialogView);
         builder.setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                EditText editText = findViewById(R.id.searchUsername);
+                EditText editText = dialogView.findViewById(R.id.searchUsername);
                 String searchUsername = editText.getText().toString();
+
+                if (searchUsername.equals("")) { // if username is empty
+                    Toast.makeText(MainActivity.this, "You need to enter a username.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                i.putExtra("USERNAME", searchUsername);
+                MainActivity.this.startActivity(i);
+
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -94,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("Search by user");
         AlertDialog dialog = builder.create();
         dialog.show();
-        return dialog;
     }
 
 

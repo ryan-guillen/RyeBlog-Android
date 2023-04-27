@@ -13,7 +13,7 @@ import java.util.List;
 public interface PostDAO {
     @Query("SELECT * FROM posts WHERE username = :username " +
             "ORDER BY title")
-    LiveData<List<Post>> getPosts(boolean username);
+    LiveData<List<Post>> getPosts(String username);
 
     @Query("SELECT * FROM posts")
     LiveData<List<Post>> getAll();

@@ -12,10 +12,15 @@ public class PostViewModel extends AndroidViewModel {
 
     public PostViewModel (Application application) {
         super(application);
-        posts = PostDatabase.getDatabase(getApplication()).postDAO().getAll();
     }
 
     public LiveData<List<Post>> getAllPosts() {
+        posts = PostDatabase.getDatabase(getApplication()).postDAO().getAll();
+        return posts;
+    }
+
+    public LiveData<List<Post>> getPosts(String username) {
+        posts = PostDatabase.getDatabase(getApplication()).postDAO().getPosts(username);
         return posts;
     }
 }
