@@ -29,11 +29,10 @@
         <activity
             android:name=".SettingsActivity"
             android:exported="true"
-            android:label="settings"></activity>
+            android:label="Settings"/>
         <activity
             android:name=".AddPostActivity"
-            android:exported="true"
-            android:label="addpost"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

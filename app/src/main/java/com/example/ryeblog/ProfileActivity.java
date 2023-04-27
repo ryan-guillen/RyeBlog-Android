@@ -31,14 +31,14 @@ public class ProfileActivity extends AppCompatActivity {
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         Bundle extras = getIntent().getExtras();
         String searchUsername = "";
         if (extras != null) {
             searchUsername = extras.getString("USERNAME");
         }
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.lstPosts);
         PostListAdapter adapter = new PostListAdapter(this);
