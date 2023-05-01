@@ -20,10 +20,21 @@ import com.example.ryeblog.DB.Post;
 import com.example.ryeblog.DB.PostDatabase;
 
 public class AddPostActivity extends AppCompatActivity {
+    String savedTitle;
+    String savedText;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
         setContentView(R.layout.activity_addpost);
+
+        if (b != null) {
+            savedTitle = b.getString("TITLE");
+            savedText = b.getString("TEXT");
+            EditText editTitle = findViewById(R.id.title);
+            EditText editText = findViewById(R.id.text);
+            editTitle.setText(savedTitle);
+            editText.setText(savedText);
+        }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,6 +42,13 @@ public class AddPostActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle b) {
+        super.onSaveInstanceState(b);
+        b.putString("TITLE", savedTitle);
+        b.putString("TEXT", savedText);
     }
 
     public void confirmDialog(View view) {
