@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface UserDAO {
     @Query("SELECT * FROM users WHERE username = :username")
-    LiveData<List<User>> getUser(String username);
+    User getUser(String username);
 
     @Query("SELECT * FROM users")
     LiveData<List<User>> getAll();

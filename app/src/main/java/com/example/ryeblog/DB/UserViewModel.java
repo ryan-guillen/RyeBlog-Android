@@ -9,6 +9,7 @@ import java.util.List;
 
 public class UserViewModel extends AndroidViewModel {
     private LiveData<List<User>> users;
+    private User user;
 
     public UserViewModel(Application application) {
         super(application);
@@ -19,8 +20,8 @@ public class UserViewModel extends AndroidViewModel {
         return users;
     }
 
-    public LiveData<List<User>> getUser(String username) {
-        users = UserDatabase.getDatabase(getApplication()).userDAO().getUser(username);
-        return users;
+    public User getUser(String username) {
+        user = UserDatabase.getDatabase(getApplication()).userDAO().getUser(username);
+        return user;
     }
 }

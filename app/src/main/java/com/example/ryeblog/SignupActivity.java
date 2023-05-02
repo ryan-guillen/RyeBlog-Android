@@ -18,7 +18,7 @@ import com.example.ryeblog.DB.UserViewModel;
 
 import java.util.List;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements UserDatabase.UserListener {
 
     private UserViewModel userViewModel;
 
@@ -36,6 +36,25 @@ public class SignupActivity extends AppCompatActivity {
         userViewModel.getAllUsers().getValue();
     }
 
+    @Override
+    public void onUserReturned(User user) {
+        System.out.println("user returned");
+        if (user != null) {
+            Toast.makeText(this, "Username taken!",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            EditText editUser = findViewById(R.id.username);
+            EditText editBio = findViewById(R.id.bio);
+            String username = editUser.getText().toString();
+            String bio = editBio.getText().toString();
+            User newUser = new User(username, bio);
+            UserDatabase.insert(newUser);
+            Toast.makeText(this, "Account successfully created!",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void onSignup(View view) {
         EditText editUser = findViewById(R.id.username);
         EditText editBio = findViewById(R.id.bio);
@@ -45,7 +64,10 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(this, "You need to fill in all fields.",
                     Toast.LENGTH_SHORT).show();
         }
-        User user = new User(username, bio);
+        else {
+            UserDatabase.getUser(username, this);
+        }
+        /*
         try {
             UserDatabase.insert(user);
         }
@@ -53,5 +75,7 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(this, "That username is already taken!",
                     Toast.LENGTH_SHORT).show();
         }
+
+         */
     }
 }
