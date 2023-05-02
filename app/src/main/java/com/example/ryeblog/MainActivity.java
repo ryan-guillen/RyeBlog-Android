@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
         postViewModel.getAllPosts().observe(this, adapter::setPosts);
     }
-    AddPostActivity addPostActivity = new AddPostActivity();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

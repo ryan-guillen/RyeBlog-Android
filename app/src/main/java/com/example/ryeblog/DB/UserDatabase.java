@@ -7,10 +7,11 @@ import android.os.Message;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
+import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class}, version = 2, exportSchema = false)
 public abstract class UserDatabase extends RoomDatabase {
     public interface UserListener {
         void onUserReturned(User user);
@@ -21,6 +22,18 @@ public abstract class UserDatabase extends RoomDatabase {
     private static UserDatabase INSTANCE;
 
     public static UserDatabase getDatabase(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (UserDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                                    UserDatabase.class, "user_database")
+                            .addCallback(createUserDatabaseCallback)
+                            .build();
+                    System.out.println("instance was null");
+                }
+            }
+
+        }
         return INSTANCE;
     }
 
@@ -28,7 +41,7 @@ public abstract class UserDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            //createUserTable();
+            insert(new User("admin", "this is the admin"));
         }
     };
 

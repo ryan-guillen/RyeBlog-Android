@@ -1,19 +1,57 @@
 package com.example.ryeblog;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.ryeblog.DB.PostViewModel;
+import com.example.ryeblog.DB.User;
+import com.example.ryeblog.DB.UserDatabase;
+import com.example.ryeblog.DB.UserViewModel;
+
+import java.util.List;
 
 public class SignupActivity extends AppCompatActivity {
+
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.getAllUsers().getValue();
     }
 
     public void onSignup(View view) {
-        System.out.println("signed up clicked");
+        EditText editUser = findViewById(R.id.username);
+        EditText editBio = findViewById(R.id.bio);
+        String username = editUser.getText().toString();
+        String bio = editBio.getText().toString();
+        if (username.equals("") || bio.equals("")) {
+            Toast.makeText(this, "You need to fill in all fields.",
+                    Toast.LENGTH_SHORT).show();
+        }
+        User user = new User(username, bio);
+        try {
+            UserDatabase.insert(user);
+        }
+        catch (android.database.sqlite.SQLiteConstraintException e) {
+            Toast.makeText(this, "That username is already taken!",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }

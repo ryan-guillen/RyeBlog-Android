@@ -25,14 +25,11 @@ public abstract class PostDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (PostDatabase.class) {
                 if (INSTANCE == null) {
-                    //createPostTable();
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     PostDatabase.class, "post_database")
                             .addCallback(createPostDatabaseCallback)
                             .build();
                     System.out.println("instance was null");
-
-                    //System.out.println("text: " + INSTANCE.postDAO().getById(0).text);
                 }
             }
 
