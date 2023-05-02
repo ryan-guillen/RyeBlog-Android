@@ -29,7 +29,6 @@ public abstract class PostDatabase extends RoomDatabase {
                                     PostDatabase.class, "post_database")
                             .addCallback(createPostDatabaseCallback)
                             .build();
-                    System.out.println("instance was null");
                 }
             }
 

@@ -29,7 +29,6 @@ public abstract class UserDatabase extends RoomDatabase {
                                     UserDatabase.class, "user_database")
                             .addCallback(createUserDatabaseCallback)
                             .build();
-                    System.out.println("instance was null");
                 }
             }
 

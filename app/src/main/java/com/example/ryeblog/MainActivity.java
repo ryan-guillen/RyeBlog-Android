@@ -154,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
                 holder.post = current;
                 holder.titleView.setText(current.title);
                 holder.userView.setText(current.username);
-                //holder.userView.setPaintFlags(holder.userView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 holder.textView.setText(current.text);
             } else {
                 holder.titleView.setText("...intializing...");
