@@ -33,8 +33,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
-
     public void onLogin(View view) {
         EditText editText = findViewById(R.id.username);
         String username = editText.getText().toString();
@@ -50,6 +48,10 @@ public class LoginActivity extends AppCompatActivity {
         else {
             Toast.makeText(this, "Please enter in a username", Toast.LENGTH_SHORT).show();
         }
+    }
 
+    public void onSignup(View view) {
+        Intent i = new Intent(this, SignupActivity.class);
+        startActivity(i);
     }
 }

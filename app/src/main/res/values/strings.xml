@@ -12,4 +12,7 @@
     <string name="cancel">Cancel</string>
     <string name="logout">Logout</string>
     <string name="yes">Yes</string>
+    <string name="bio">Bio</string>
+    <string name="signup"><u>Sign Up</u></string>
+    <string name="accButton">CREATE ACCOUNT</string>
 </resources>

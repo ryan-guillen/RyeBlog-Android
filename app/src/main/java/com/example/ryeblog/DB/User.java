@@ -1,5 +1,6 @@
 package com.example.ryeblog.DB;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -12,6 +13,7 @@ public class User {
     }
 
     @PrimaryKey(autoGenerate = false)
+    @NonNull
     @ColumnInfo(name = "username")
     public String username;
 
