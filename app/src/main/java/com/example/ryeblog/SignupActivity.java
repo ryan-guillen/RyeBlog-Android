@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -67,15 +69,5 @@ public class SignupActivity extends AppCompatActivity implements UserDatabase.Us
         else {
             UserDatabase.getUser(username, this);
         }
-        /*
-        try {
-            UserDatabase.insert(user);
-        }
-        catch (android.database.sqlite.SQLiteConstraintException e) {
-            Toast.makeText(this, "That username is already taken!",
-                    Toast.LENGTH_SHORT).show();
-        }
-
-         */
     }
 }

@@ -74,8 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 searchDialog();
                 return true;
             case R.id.logout:
+                SharedPreferences sharedPref = this.getSharedPreferences("application", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("USERNAME", "-1");
+                editor.apply(); // logs user out
+
                 i = new Intent(this, LoginActivity.class);
-                i.putExtra("LOGOUT", true);
                 startActivity(i);
                 return true;
             default:

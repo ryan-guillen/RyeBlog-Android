@@ -25,15 +25,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Bundle extras = getIntent().getExtras();
-        boolean loggedOut = false;
-        if (extras != null) {
-            loggedOut = extras.getBoolean("LOGOUT");
-        }
-
         SharedPreferences sharedPref = this.getSharedPreferences("application", Context.MODE_PRIVATE);
-        // if already logged in, go to MainActivity instead, unless you for here from logout
-        if (!sharedPref.getString("USERNAME", "-1").equals("-1") && !loggedOut) {
+        // if already logged in, go to MainActivity instead
+        if (!sharedPref.getString("USERNAME", "-1").equals("-1")) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
